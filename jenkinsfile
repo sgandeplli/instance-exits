@@ -3,8 +3,8 @@ pipeline {
   environment {
     GOOGLE_APPLICATION_CRENDITIONAL = crenditional("gcp-sa")
   }
-  stages ("connecting to git"){
-     stage{
+  stages {
+     stage ("connecting to git") {
         step{
           git branch : "main", url : "https://github.com/sgandeplli/instance-exits.git"
         }
