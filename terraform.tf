@@ -9,10 +9,10 @@ data "google_compute_instance" "existing_instance" {
   name = "naruto-server"  # Name of the instance you are checking for
   zone = "us-central1-a"
 
-  # Optional: To prevent errors when the instance doesn't exist
-  lifecycle {
-    ignore_errors = true  # Ignore errors if the instance doesn't exist
-  }
+ // # Optional: To prevent errors when the instance doesn't exist
+  //lifecycle {
+  //  ignore_errors = true  # Ignore errors if the instance doesn't exist
+  //}
 }
 
 # Conditional logic to create the instance if it doesn't already exist
@@ -66,5 +66,5 @@ resource "google_compute_firewall" "allow_http" {
 # Output the external IP of the created instance
 output "instance_external_ip" {
   value = google_compute_instance.naruto.network_interface[0].access_config[0].nat_ip
-  condition = length(data.google_compute_instance.existing_instance.self_link) == 0
+ 
 }
