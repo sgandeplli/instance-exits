@@ -6,7 +6,7 @@ pipeline {
   stages ("connecting to git"){
      stage{
         step{
-          git branch : "main", url : ""
+          git branch : "main", url : "https://github.com/sgandeplli/instance-exits.git"
         }
     }
 
