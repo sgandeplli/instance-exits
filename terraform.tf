@@ -14,7 +14,7 @@ data "google_compute_instance" "existing_instance" {
 resource "google_compute_instance" "naruto" {
   count        = length(data.google_compute_instance.existing_instance.self_link) == 0 ? 1 : 0
 
-  name         = "naruto-srver"
+  name         = "naruto-server"  # Corrected instance name
   machine_type = "e2-micro"  # Machine type (1 vCPU, 1 GB memory)
   zone         = "us-central1-a"
 
@@ -34,7 +34,7 @@ resource "google_compute_instance" "naruto" {
   # Metadata for startup script (Optional: Apache web server setup for CentOS 9)
   metadata_startup_script = <<-EOT
     #!/bin/bash
-    sudo yum update -y
+    //sudo yum update -y
     sudo yum install -y httpd
     echo "Welcome to Naruto's CentOS 9 web server!" > /var/www/html/index.html
     sudo systemctl start httpd
@@ -46,6 +46,7 @@ resource "google_compute_instance" "naruto" {
 
 # Firewall rule to allow HTTP traffic
 resource "google_compute_firewall" "allow_http" {
+  count   = google_compute_instance.naruto.count  # Only create if instance is created
   name    = "allow-http"
   network = "default"
 
