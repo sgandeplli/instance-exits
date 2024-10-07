@@ -14,7 +14,7 @@ data "google_compute_instance" "existing_instance" {
 resource "google_compute_instance" "naruto" {
   count        = length(data.google_compute_instance.existing_instance.self_link) == 0 ? 1 : 0
 
-  name         = "naruto"
+  name         = "naruto-srver"
   machine_type = "e2-micro"  # Machine type (1 vCPU, 1 GB memory)
   zone         = "us-central1-a"
 
