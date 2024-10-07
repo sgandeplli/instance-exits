@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  environment {
+    GOOGLE_APPLICATION_CRENDITIONAL = crenditional("gcp-sa")
+  }
+  stages ("connecting to git"){
+     stage{
+        step{
+          git branch : "main", url : ""
+        }
+    }
+
+    stage ("terraform initlation"){
+        step{
+          sh "terraform init"
+          sh "terraform apply -auto-approve"  
+        }
+    }
+  }
+
+}
