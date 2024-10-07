@@ -64,7 +64,12 @@ resource "google_compute_firewall" "allow_http" {
 }
 
 # Output the external IP of the created instance
-output "instance_external_ip" {
-  value = google_compute_instance.naruto.network_interface[0].access_config[0].nat_ip
+//output "instance_external_ip" {
+//  value = google_compute_instance.naruto.network_interface[0].access_config[0].nat_ip
  
+//}
+
+output "instance_external_ip" {
+  value = google_compute_instance.naruto[0].network_interface[0].access_config[0].nat_ip
 }
+
