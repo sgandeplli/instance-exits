@@ -1,17 +1,17 @@
 pipeline {
   agent any
   environment {
-    GOOGLE_APPLICATION_CRENDITIONAL = crenditional("gcp-sa")
+     GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-sa')
   }
   stages {
      stage ("connecting to git") {
-        step{
+        steps{
           git branch : "main", url : "https://github.com/sgandeplli/instance-exits.git"
         }
     }
 
     stage ("terraform initlation"){
-        step{
+        steps{
           sh "terraform init"
           sh "terraform apply -auto-approve"  
         }
